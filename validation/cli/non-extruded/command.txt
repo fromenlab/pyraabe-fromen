@@ -1,0 +1,1 @@
+pyraabe validation/models/bifurcation_open.stl validation/cli/extruded -g 0 0 -1

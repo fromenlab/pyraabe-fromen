@@ -1,8 +1,7 @@
-from pyraabe_3199c8b import pyraabe
 import os
+from pyraabe_3199c8b import pyraabe
 
-
-def main(infile, outdir, vector):
+def main(infile, outdir, vector, extruded):
     """
     Modified GUI response interface for PyRaabe functionality. Does not use command line args
 
@@ -11,7 +10,7 @@ def main(infile, outdir, vector):
     if (not outdir):
         outdir = os.path.dirname(infiles[0])
     gravity_vector = vector
-    extruded = False
+    extruded = extruded
 
     # iterate inputs
     centerline_paths = []
@@ -29,7 +28,7 @@ def main(infile, outdir, vector):
         if not os.path.exists(centerline_path):
             pyraabe.centerline.compute(infile, centerline_path)
         else:
-            print('{} already exists. Skipping centerline calculation.'.format(centerline_path))
+            print('{} already exists.\n Skipping centerline calculation.'.format(centerline_path))
 
     # merge
     if len(centerline_paths) > 1:
@@ -58,3 +57,5 @@ def main(infile, outdir, vector):
 
         # drop column and save
         raabe.drop(columns='endpoint_idx').to_csv(raabe_path, sep=',')
+    
+    print('\n Complete: ', infile)
